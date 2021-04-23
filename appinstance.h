@@ -14,7 +14,9 @@ public:
     explicit AppInstance(QObject* parent = nullptr);
     ~AppInstance();
     void initTestSpots();
-    QList<Spot*> const& getSpots() const;
+    QList<Spot*>& getSpots();
+
+    Q_INVOKABLE void deleteSpot(QUuid const& uuid);
 
     void loadSpots();
     void saveSpots();

@@ -48,9 +48,17 @@ void AppInstance::initTestSpots()
     emit spotsChanged(this->spots);
 }
 
-QList<Spot*> const& AppInstance::getSpots() const
+QList<Spot*>& AppInstance::getSpots()
 {
     return this->spots;
+}
+
+void AppInstance::deleteSpot(QUuid const& uuid)
+{
+    this->spots.erase(std::find_if(this->spots.begin(), this->spots.end(), [uuid](auto const& e){
+        return e->getUuid() == uuid;
+    }));
+    emit spotsChanged(this->spots);
 }
 
 void AppInstance::loadSpots()

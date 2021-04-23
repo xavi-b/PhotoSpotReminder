@@ -6,6 +6,10 @@ import Spot 1.0
 Page {
     title: spot ? spot.name : "EMPTY"
 
+    //TODO share btn
+    //TODO goTo btn
+    //TODO delete btn
+
     property Spot spot;
 
     header: ToolBar {
@@ -78,7 +82,7 @@ Page {
         anchors.left: parent.left
         anchors.right: parent.right
         height: initialHeight
-        color: "white"
+        color: Material.backgroundColor
 
         Behavior on height {
             PropertyAnimation {
@@ -92,14 +96,17 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.initialHeight
-            text: "Button"
-            Material.background: Material.backgroundColor
+            Material.background: "transparent"
+            icon.source: "qrc:/icons/FontAwesome/fa-chevron-up.svg"
 
             onClicked: {
-                if(parent.height > parent.initialHeight)
+                if(parent.height > parent.initialHeight) {
+                    icon.source = "qrc:/icons/FontAwesome/fa-chevron-up.svg"
                     parent.height = parent.initialHeight;
-                else
+                } else {
+                    icon.source = "qrc:/icons/FontAwesome/fa-chevron-down.svg"
                     parent.height = 200;
+                }
             }
         }
 
@@ -109,6 +116,8 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
+            anchors.margins: 10
+            color: "white"
             onTextChanged: {
                 spot.description = text;
             }
@@ -125,9 +134,9 @@ Page {
         anchors.bottomMargin: 20
         Material.background: Material.backgroundColor
 
-        icon.source: "qrc:/icons/FontAwesome/fa-dot-circle.svg"
+        icon.source: "qrc:/icons/FontAwesome/fa-plus.svg"
         onClicked: {
-            //TODO
+            stackView.push("CapturePage.qml", { "spot": spot })
         }
     }
 }
