@@ -87,6 +87,7 @@ Page {
         }
 
         Button {
+            id: openBtn
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
@@ -99,6 +100,17 @@ Page {
                     parent.height = parent.initialHeight;
                 else
                     parent.height = 200;
+            }
+        }
+
+        TextEdit {
+            text: spot.description
+            anchors.top: openBtn.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            onTextChanged: {
+                spot.description = text;
             }
         }
     }
