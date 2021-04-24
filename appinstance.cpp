@@ -1,6 +1,7 @@
 #include "appinstance.h"
 #include <QFile>
 #include <QMessageBox>
+#include <QStandardPaths>
 
 AppInstance::AppInstance(QObject* parent)
     : QObject(parent), QQuickImageProvider(QQuickImageProvider::Pixmap)
@@ -60,10 +61,16 @@ void AppInstance::deleteSpot(QUuid const& uuid)
     emit spotsChanged(this->spots);
 }
 
+QString AppInstance::dataFileName() const
+{
+    QString path = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::AppDataLocation);
+    qDebug() << "path: " << path;
+    return path + "/spots.save";
+}
+
 void AppInstance::loadSpots()
 {
-    //TODO
-    QFile file("fileName");
+    QFile file(this->dataFileName());
 
     if (!file.open(QIODevice::ReadOnly))
     {
@@ -79,8 +86,7 @@ void AppInstance::loadSpots()
 
 void AppInstance::saveSpots()
 {
-    //TODO
-    QFile file("fileName");
+    QFile file(this->dataFileName());
 
     if (!file.open(QIODevice::WriteOnly))
     {

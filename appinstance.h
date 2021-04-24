@@ -19,6 +19,7 @@ public:
     Q_INVOKABLE Spot* addSpot(QGeoCoordinate const& coordinate);
     Q_INVOKABLE void deleteSpot(QUuid const& uuid);
 
+    virtual QString dataFileName() const;
     void loadSpots();
     void saveSpots();
 
