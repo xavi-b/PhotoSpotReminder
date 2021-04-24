@@ -5,11 +5,6 @@ Spot::Spot(QObject* parent)
 {
 }
 
-Spot::Spot(QString name, QObject* parent)
-    : QObject(parent), name(name), uuid(QUuid::createUuid())
-{
-}
-
 QUuid Spot::getUuid() const
 {
     return uuid;

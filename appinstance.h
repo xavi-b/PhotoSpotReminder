@@ -16,6 +16,7 @@ public:
     void initTestSpots();
     QList<Spot*>& getSpots();
 
+    Q_INVOKABLE Spot* addSpot(QGeoCoordinate const& coordinate);
     Q_INVOKABLE void deleteSpot(QUuid const& uuid);
 
     void loadSpots();

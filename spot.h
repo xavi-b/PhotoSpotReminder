@@ -19,7 +19,6 @@ class Spot : public QObject
 
 public:
     explicit Spot(QObject* parent = nullptr);
-    explicit Spot(QString, QObject* parent = nullptr);
 
     QUuid getUuid() const;
     QString getName() const;

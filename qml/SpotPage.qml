@@ -8,13 +8,26 @@ Page {
 
     //TODO share btn
     //TODO goTo btn
-    //TODO delete btn
 
     property Spot spot;
 
     header: ToolBar {
         id: header
         contentHeight: toolButton.implicitHeight
+
+        TextInput {
+            text: spot.name
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            color: "white"
+            onTextChanged: {
+                spot.name = text;
+            }
+        }
 
         ToolButton {
             id: toolButton
@@ -27,9 +40,17 @@ Page {
             }
         }
 
-        Label {
-            text: stackView.currentItem.title
-            anchors.centerIn: parent
+        ToolButton {
+            id: deleteButton
+            anchors.right: parent.right
+            text: "X"
+            font.pixelSize: Qt.application.font.pixelSize * 1.6
+            onClicked: {
+                if (stackView.depth > 1) {
+                    AppInstance.deleteSpot(spot.uuid);
+                    stackView.pop()
+                }
+            }
         }
     }
 

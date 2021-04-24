@@ -17,18 +17,9 @@ AppInstance::~AppInstance()
 void AppInstance::initTestSpots()
 {
     this->spots = {
-        new Spot("Front gps", this),
-        new Spot("Rear gps", this),
-        new Spot("Starboard gps", this),
-        new Spot("Port gps", this),
-        new Spot("Compass #1", this),
-        new Spot("Compass #2", this),
-        new Spot("Compass #3", this),
-        new Spot("Compass #4", this),
-        new Spot("Primary anemometer", this),
-        new Spot("Secondary anemometer", this),
-        new Spot("Main gyro", this),
-        new Spot("Backup gyro", this)
+        new Spot(this),
+        new Spot(this),
+        new Spot(this)
     };
     QPixmap pixmap(100, 100);
     pixmap.fill(Qt::red);
@@ -53,9 +44,17 @@ QList<Spot*>& AppInstance::getSpots()
     return this->spots;
 }
 
+Spot* AppInstance::addSpot(QGeoCoordinate const& coordinate)
+{
+    this->spots.append(new Spot(this));
+    this->spots.last()->setCoordinate(coordinate);
+    emit spotsChanged(this->spots);
+    return this->spots.last();
+}
+
 void AppInstance::deleteSpot(QUuid const& uuid)
 {
-    this->spots.erase(std::find_if(this->spots.begin(), this->spots.end(), [uuid](auto const& e){
+    this->spots.erase(std::find_if(this->spots.begin(), this->spots.end(), [uuid](Spot* const& e){
         return e->getUuid() == uuid;
     }));
     emit spotsChanged(this->spots);
@@ -69,6 +68,7 @@ void AppInstance::loadSpots()
     {
         this->initTestSpots();
         //QMessageBox::warning(this, tr("Unable to spots file"), file.errorString(), tr("Ok"));
+        qWarning() << "Unable to spots file";
         return;
     }
 
@@ -83,6 +83,7 @@ void AppInstance::saveSpots()
     if (!file.open(QIODevice::WriteOnly))
     {
         //QMessageBox::warning(this, tr("Unable to spots file"), file.errorString(), tr("Ok"));
+        qWarning() << "Unable to spots file";
         return;
     }
 

@@ -23,45 +23,39 @@ ApplicationWindow {
         }
     }
 
-//    PositionSource {
-//        id: positionSource
-//        updateInterval: 500
-//        active: false
-//        //        name: "gpsd"
-//        name: "fake"
+    PositionSource {
+        id: positionSource
+        updateInterval: 1000
+        active: true
 
-//        PluginParameter { name: "port"; value: port }
-//        PluginParameter { name: "host"; value: host }
+        Component.onCompleted: {
+            console.log("PositionSource ready");
+        }
 
-//        Component.onCompleted: {
-//            console.log("PositionSource ready");
-//            positionSource.start();
-//        }
+        onSourceErrorChanged: {
+            switch(sourceError) {
+            case PositionSource.AccessError:
+                console.log("AccessError"); break;
+            case PositionSource.ClosedError:
+                console.log("ClosedError"); break;
+            case PositionSource.NoError:
+                console.log("NoError"); break;
+            case PositionSource.UnknownSourceError:
+                console.log("UnknownSourceError"); break;
+            case PositionSource.AccessError:
+                console.log("SocketError"); break;
+            }
 
-//        onSourceErrorChanged: {
-//            switch(sourceError) {
-//            case PositionSource.AccessError:
-//                console.log("AccessError"); break;
-//            case PositionSource.ClosedError:
-//                console.log("ClosedError"); break;
-//            case PositionSource.NoError:
-//                console.log("NoError"); break;
-//            case PositionSource.UnknownSourceError:
-//                console.log("UnknownSourceError"); break;
-//            case PositionSource.AccessError:
-//                console.log("SocketError"); break;
-//            }
+        }
 
-//        }
+        onUpdateTimeout: {
+            console.log("Update timeout");
+        }
 
-//        onUpdateTimeout: {
-//            console.log("Update timeout");
-//        }
-
-//        onActiveChanged: {
-//            console.log("Active: " + active);
-//        }
-//    }
+        onActiveChanged: {
+            console.log("Active: " + active);
+        }
+    }
 
     StackView {
         id: stackView

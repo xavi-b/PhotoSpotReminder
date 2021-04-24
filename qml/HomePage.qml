@@ -38,36 +38,50 @@ Page {
         property var currentIndexCoordinate;
         property var mapCenter;
 
-//        MapQuickItem {
-//            id: poiCurrent
-//            sourceItem: Rectangle { width: 14; height: 14; color: "#1e25e4"; border.width: 2; border.color: "white"; smooth: true; radius: 7 }
-//            opacity: 1.0
-//            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
-//            coordinate: positionSource.position.coordinate
-//        }
-
         MapQuickItem {
-            id: poiTest
+            id: poiCurrent
             sourceItem: Rectangle {
                 width: 14;
                 height: 14;
-                color: "#1e25e4";
+                color: "red";
                 border.width: 2;
                 border.color: "white";
                 smooth: true;
                 radius: 7;
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        stackView.push("Spot.qml")
-                    }
-                }
             }
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
-            coordinate: QtPositioning.coordinate(51.509865, -0.118092)
+            coordinate: positionSource.position.coordinate
+        }
+
+        MapItemView {
+            id: mapItemView
+            model: AppInstance.spots
+            //autoFitViewport: true
+            delegate: MapQuickItem {
+                property var spot: AppInstance.spots[index]
+                id: point
+                sourceItem: Rectangle {
+                    width: 14;
+                    height: 14;
+                    color: "#1e25e4";
+                    border.width: 2;
+                    border.color: "white";
+                    smooth: true;
+                    radius: 7;
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            stackView.push("SpotPage.qml", { "spot" : spot })
+                        }
+                    }
+                }
+                opacity: 1.0
+                anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
+                coordinate: spot.coordinate
+            }
         }
 
         RoundButton {
@@ -80,9 +94,10 @@ Page {
             anchors.bottomMargin: 20
             Material.background: Material.backgroundColor
 
-            icon.source: "qrc:/icons/FontAwesome/fa-stop-circle.svg"
+            icon.source: "qrc:/icons/FontAwesome/fa-plus.svg"
             onClicked: {
-                // TODO
+                var spot = AppInstance.addSpot(positionSource.position.coordinate);
+                stackView.push("SpotPage.qml", { "spot": spot })
             }
         }
 

@@ -89,7 +89,8 @@ Page {
 
             icon.source: "qrc:/icons/FontAwesome/fa-plus.svg"
             onClicked: {
-                //TODO
+                var spot = AppInstance.addSpot(positionSource.position.coordinate);
+                stackView.push("SpotPage.qml", { "spot": spot })
             }
         }
     }
