@@ -12,5 +12,9 @@
         <file>icons/FontAwesome/fa-plus.svg</file>
         <file>icons/FontAwesome/fa-chevron-down.svg</file>
         <file>icons/FontAwesome/fa-chevron-up.svg</file>
+        <file>icons/FontAwesome/fa-arrow-left.svg</file>
+        <file>icons/FontAwesome/fa-bars.svg</file>
+        <file>icons/FontAwesome/fa-ellipsis-h.svg</file>
+        <file>icons/FontAwesome/fa-ellipsis-v.svg</file>
     </qresource>
 </RCC>

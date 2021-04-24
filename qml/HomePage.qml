@@ -13,7 +13,13 @@ Page {
 
         ToolButton {
             id: toolButton
-            text: stackView.depth > 1 ? "\u25C0" : "\u2630"
+            icon.source: {
+                if(stackView.depth > 1) {
+                    return "qrc:/icons/FontAwesome/fa-arrow-left.svg";
+                } else {
+                    return "qrc:/icons/FontAwesome/fa-bars.svg";
+                }
+            }
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 if (stackView.depth > 1) {
