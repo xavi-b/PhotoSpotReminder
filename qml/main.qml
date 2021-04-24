@@ -39,6 +39,9 @@ ApplicationWindow {
         updateInterval: 1000
         active: true
 
+        property bool firstPositionUpdate: true
+        signal firstPositionUpdated()
+
         Component.onCompleted: {
             console.log("PositionSource ready");
         }
@@ -68,6 +71,13 @@ ApplicationWindow {
 
         onActiveChanged: {
             console.log("Active: " + active);
+        }
+
+        onPositionChanged: {
+            if(firstPositionUpdate) {
+                firstPositionUpdate = false;
+                firstPositionUpdated();
+            }
         }
     }
 

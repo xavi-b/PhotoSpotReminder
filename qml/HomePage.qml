@@ -36,8 +36,9 @@ Page {
         anchors.fill: parent
 
         Component.onCompleted: {
-            //TODO not working
-            map.center = positionSource.position.coordinate
+            positionSource.firstPositionUpdated.connect(function(){
+                map.center = positionSource.position.coordinate
+            });
         }
 
         Behavior on center {
