@@ -34,7 +34,7 @@ public:
 
     Q_INVOKABLE QUuid addPhoto(QQuickItemGrabResult* const& grabResult);
     QUuid addPhoto(QPixmap const& pixmap);
-    Q_INVOKABLE void deletePhoto(QUuid const& uuid);
+    Q_INVOKABLE void deletePhoto(QString const& url);
 
     friend QDataStream& operator<<(QDataStream& stream, Spot const& spot);
     friend QDataStream& operator>>(QDataStream& stream, Spot& spot);

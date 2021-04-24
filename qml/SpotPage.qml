@@ -82,7 +82,7 @@ Page {
 
             model: spot.photos
             delegate: Component {
-                Item {
+                MouseArea {
                     width: gridView.cellWidth
                     height: gridView.cellHeight
                     Rectangle {
@@ -95,6 +95,10 @@ Page {
                             fillMode: Image.PreserveAspectCrop
                             clip: true
                         }
+                    }
+
+                    onClicked: {
+                        stackView.push("PhotoPage.qml", { "spot": spot, "photo": spot.photos[index] })
                     }
                 }
             }

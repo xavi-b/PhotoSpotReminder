@@ -6,5 +6,6 @@
         <file>qml/SpotPage.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/CapturePage.qml</file>
+        <file>qml/PhotoPage.qml</file>
     </qresource>
 </RCC>

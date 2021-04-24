@@ -72,10 +72,19 @@ QUuid Spot::addPhoto(QPixmap const& pixmap)
     return uuid;
 }
 
-void Spot::deletePhoto(QUuid const& uuid)
+void Spot::deletePhoto(QString const& url)
 {
-    this->photos.remove(uuid);
-    emit photosChanged(this->getPhotoKeys());
+    qDebug() << "deletePhoto";
+    QString cleaned(url);
+    cleaned.replace("%7B", "{");
+    cleaned.replace("%7D", "}");
+    qDebug() << url;
+    QStringList uuids = cleaned.split('@');
+    if(uuids.length() == 2)
+    {
+        this->photos.remove(uuids.last());
+        emit photosChanged(this->getPhotoKeys());
+    }
 }
 
 QDataStream& operator<<(QDataStream& stream, Spot const& spot)
