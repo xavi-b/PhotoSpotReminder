@@ -9,13 +9,6 @@ ApplicationWindow {
     visible: true
     title: Qt.application.name
 
-    Keys.onReleased: {
-        if (event.matches(StandardKey.Back)) {
-            console.log("Back key");
-            event.accepted = true;
-        }
-    }
-
     Plugin {
         id: mapPlugin
         name: "osm"
@@ -82,5 +75,13 @@ ApplicationWindow {
         id: stackView
         initialItem: "HomePage.qml"
         anchors.fill: parent
+        Keys.onBackPressed: {
+            console.log("Back button")
+            if (depth > 1) {
+                pop();
+            } else {
+                Qt.quit();
+            }
+        }
     }
 }

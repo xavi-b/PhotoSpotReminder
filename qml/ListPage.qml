@@ -14,7 +14,7 @@ Page {
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 if (stackView.depth > 1) {
-                    stackView.pop()
+                    stackView.pop();
                 }
             }
         }

@@ -35,7 +35,7 @@ Page {
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 if (stackView.depth > 1) {
-                    stackView.pop()
+                    stackView.pop();
                 }
             }
         }
@@ -48,7 +48,7 @@ Page {
             onClicked: {
                 if (stackView.depth > 1) {
                     AppInstance.deleteSpot(spot.uuid);
-                    stackView.pop()
+                    stackView.pop();
                 }
             }
         }
@@ -62,14 +62,14 @@ Page {
         anchors.bottom: panel.top
 
         id: wrapper
-        color: "orange"
+        color: "transparent"
 
         GridView {
             id: gridView
             anchors.fill: parent
 
-            property var idealCellHeight: 200
-            property var idealCellWidth: 200
+            property var idealCellHeight: 150
+            property var idealCellWidth: 150
 
             cellHeight: idealCellHeight
             cellWidth: width / Math.floor(width / idealCellWidth)
