@@ -62,6 +62,7 @@ void AppInstance::deleteSpot(QUuid const& uuid)
 
 void AppInstance::loadSpots()
 {
+    //TODO
     QFile file("fileName");
 
     if (!file.open(QIODevice::ReadOnly))
@@ -78,6 +79,7 @@ void AppInstance::loadSpots()
 
 void AppInstance::saveSpots()
 {
+    //TODO
     QFile file("fileName");
 
     if (!file.open(QIODevice::WriteOnly))

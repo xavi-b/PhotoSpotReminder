@@ -1,4 +1,5 @@
 #include "spot.h"
+#include <QDebug>
 
 Spot::Spot(QObject* parent)
     : QObject(parent), uuid(QUuid::createUuid())
@@ -54,6 +55,13 @@ void Spot::setCoordinate(QGeoCoordinate const& coordinate)
 {
     this->coordinate = coordinate;
     emit coordinateChanged(coordinate);
+}
+
+QUuid Spot::addPhoto(QQuickItemGrabResult* const& grabResult)
+{
+    qDebug() << "addPhoto";
+    qDebug() << grabResult->image().isNull();
+    return this->addPhoto(QPixmap::fromImage(grabResult->image()));
 }
 
 QUuid Spot::addPhoto(QPixmap const& pixmap)

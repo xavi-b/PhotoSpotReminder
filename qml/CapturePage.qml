@@ -33,12 +33,25 @@ Page {
 
         imageCapture {
             onImageCaptured: {
-                spot.addPhoto(preview);
-                if (stackView.depth > 1) {
-                    stackView.pop()
-                }
+                console.log("onImageCaptured")
+                console.log(preview)
+                //AppInstance.addPhoto(spot, preview);
+                previewImage.source = preview;
+                previewImage.grabToImage(function(result) {
+                    console.log("grabToImage")
+                    console.log(result)
+                    spot.addPhoto(result);
+                    if (stackView.depth > 1) {
+                        stackView.pop()
+                    }
+                });
             }
         }
+    }
+
+    Image {
+        id: previewImage
+        visible: false
     }
 
     VideoOutput {
@@ -48,7 +61,10 @@ Page {
 
         MouseArea {
             anchors.fill: parent;
-            onClicked: camera.imageCapture.capture();
+            onClicked: {
+                console.log("camera onClicked")
+                camera.imageCapture.capture();
+            }
         }
     }
 }

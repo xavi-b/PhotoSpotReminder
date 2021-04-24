@@ -9,6 +9,13 @@ ApplicationWindow {
     visible: true
     title: Qt.application.name
 
+    Keys.onReleased: {
+        if (event.matches(StandardKey.Back)) {
+            console.log("Back key");
+            event.accepted = true;
+        }
+    }
+
     Plugin {
         id: mapPlugin
         name: "osm"
@@ -20,6 +27,17 @@ ApplicationWindow {
         PluginParameter {
             name: "osm.mapping.providersrepository.address"
             value: "http://maps-redirect.qt.io/osm/5.6/"
+        }
+    }
+
+    Timer {
+        id: timer
+        interval: 2000
+        running: false
+        repeat: false
+        onTriggered: {
+            console.log("Timer triggered");
+            positionSource.start();
         }
     }
 
@@ -45,7 +63,10 @@ ApplicationWindow {
             case PositionSource.AccessError:
                 console.log("SocketError"); break;
             }
-
+            if(sourceError != PositionSource.NoError && sourceError != PositionSource.UnknownSourceError) {
+                positionSource.stop();
+                timer.start();
+            }
         }
 
         onUpdateTimeout: {

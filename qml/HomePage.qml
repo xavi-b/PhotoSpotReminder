@@ -35,6 +35,27 @@ Page {
         plugin: mapPlugin
         anchors.fill: parent
 
+        Component.onCompleted: {
+            //TODO not working
+            map.center = positionSource.position.coordinate
+        }
+
+        Behavior on center {
+            CoordinateAnimation {
+                duration: driver.timerInterval
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Behavior on bearing {
+            RotationAnimation {
+                id: rot_anim
+                direction: RotationAnimation.Shortest
+                easing.type: Easing.Linear
+                duration: driver.timerInterval
+            }
+        }
+
         property var currentIndexCoordinate;
         property var mapCenter;
 

@@ -7,6 +7,7 @@
 #include <QUuid>
 #include <QDataStream>
 #include <QMap>
+#include <QQuickItemGrabResult>
 
 class Spot : public QObject
 {
@@ -31,8 +32,9 @@ public:
     void setDescription(QString const&);
     void setCoordinate(QGeoCoordinate const&);
 
+    Q_INVOKABLE QUuid addPhoto(QQuickItemGrabResult* const& grabResult);
     QUuid addPhoto(QPixmap const& pixmap);
-    void deletePhoto(QUuid const& uuid);
+    Q_INVOKABLE void deletePhoto(QUuid const& uuid);
 
     friend QDataStream& operator<<(QDataStream& stream, Spot const& spot);
     friend QDataStream& operator>>(QDataStream& stream, Spot& spot);
