@@ -49,7 +49,7 @@ Page {
         ToolButton {
             id: deleteButton
             anchors.right: parent.right
-            text: "X"
+            icon.source: "qrc:/icons/FontAwesome/fa-trash.svg"
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 if (stackView.depth > 1) {

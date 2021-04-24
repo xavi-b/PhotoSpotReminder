@@ -64,6 +64,7 @@ Page {
         source: camera
         focus : visible
         anchors.fill: parent
+        orientation: camera.orientation
 
         MouseArea {
             anchors.fill: parent;
