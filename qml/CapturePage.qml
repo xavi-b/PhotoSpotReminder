@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtMultimedia 5.15
 import Spot 1.0
+import QtQuick.Window 2.15
 
 Page {
     title: "Capture"
@@ -64,7 +65,28 @@ Page {
         source: camera
         focus : visible
         anchors.fill: parent
-        orientation: camera.orientation
+        orientation: {
+            var o = camera.orientation;
+            if(Screen.orientation == Qt.LandscapeOrientation) {
+                o += 90;
+            } else if(Screen.orientation == Qt.PortraitOrientation) {
+
+            } else if(Screen.orientation == Qt.InvertedLandscapeOrientation) {
+                o -= 90;
+            } else if(Screen.orientation == Qt.InvertedPortraitOrientation) {
+                o += 180;
+            }
+
+            o %= 360;
+
+//            console.log("camera.orientation")
+//            console.log(camera.orientation)
+//            console.log("Screen.orientation")
+//            console.log(Screen.orientation)
+//            console.log("orientation")
+//            console.log(o)
+            return o;
+        }
 
         MouseArea {
             anchors.fill: parent;

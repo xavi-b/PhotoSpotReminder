@@ -2,12 +2,15 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtLocation 5.15
 import QtPositioning 5.15
+import QtQuick.Window 2.15
 
 ApplicationWindow {
     width: 640
     height: 480
     visible: true
     title: Qt.application.name
+
+    Screen.orientationUpdateMask: Qt.PrimaryOrientation | Qt.LandscapeOrientation | Qt.PortraitOrientation | Qt.InvertedLandscapeOrientation | Qt.InvertedPortraitOrientation
 
     Plugin {
         id: mapPlugin

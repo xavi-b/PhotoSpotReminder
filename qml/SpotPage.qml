@@ -108,6 +108,7 @@ Page {
     Rectangle {
         id: panel
         property int initialHeight: 50
+        property int expandedHeight: parent.height * 0.5
 
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -136,7 +137,7 @@ Page {
                     parent.height = parent.initialHeight;
                 } else {
                     icon.source = "qrc:/icons/FontAwesome/fa-chevron-down.svg"
-                    parent.height = 200;
+                    parent.height = parent.expandedHeight;
                 }
             }
         }
